@@ -9,35 +9,93 @@
 #import "movieHomePageViewController.h"
 #import "NewPagedFlowView.h"
 #import "PGIndexBannerSubiew.h"
+#import "HotMessageModel.h"
+#import "ViewController.h"
+#import "HotSearchCollectionViewCell.h"
 #define Width [UIScreen mainScreen].bounds.size.width
-@interface movieHomePageViewController ()<NewPagedFlowViewDelegate, NewPagedFlowViewDataSource>
+@interface movieHomePageViewController ()<NewPagedFlowViewDelegate, NewPagedFlowViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 /**
  *  图片数组
  */
 @property (nonatomic, strong) NSMutableArray *imageArray;
 
 /**
- *  指示label
- */
-@property (nonatomic, strong) UILabel *indicateLabel;
-
-/**
  *  轮播图
  */
 @property (nonatomic, strong) NewPagedFlowView *pageFlowView;
+@property(nonatomic,strong)NSMutableArray *dataSource;
+@property(nonatomic,strong)HotMessageModel *movieModel;
+@property(nonatomic,strong)UICollectionView *collectionView;
 @end
 
 @implementation movieHomePageViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-//    for (int index = 0; index < 5; index++) {
-//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://pic5.nipic.com/20091227/2167235_043916212987_2.jpg"]]];
-//        [self.imageArray addObject:image];
-//    }
     [self setupUI];
+    [self requestDate];
 }
+-(void)requestDate{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //前面写服务器给的域名,后面拼接上需要提交的参数，假如参数是key＝1
+    NSString *URLString = [BHTools configUrlWithString:BHMoviehotSearch];
+    NSDictionary *parameters = @{@"action": @"GetHot"};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSData *data=(NSData *)responseObject;
+        NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *dataStr=[BHTools DecodedBase64Code:[BHTools DecodedBase64Code:str]];
+        NSDictionary *newdic=[BHTools dictionaryWithJsonString:dataStr];
+        self.dataSource=[self handleData:(NSArray *)newdic];
+        [self loadMainUI];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"失败了%@",error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+}
+-(void)loadMainUI{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    self.collectionView.backgroundColor=[UIColor clearColor];
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+//设置sectionHeader | sectionFoot
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+//        UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:collettionSectionHeader forIndexPath:indexPath];
+//        return view;
+//    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+//        UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collettionSectionFoot forIndexPath:indexPath];
+//        return view;
+//    }else{
+//        return nil;
+//    }
+//}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    HotSearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"hotSearchCell" forIndexPath:indexPath];
+    HotMessageModel *model=self.dataSource[indexPath.item];
+    NSString *movieImage=[BHTools decodeFromPercentEscapeString:model.MovieImage];
+    [cell.movieImage sd_setImageWithURL:[NSURL URLWithString:movieImage] placeholderImage:[UIImage imageNamed:@"Movie"]];
+    cell.movieName.text=[BHTools decodeFromPercentEscapeString:model.MovieName];
+    return cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    HotMessageModel *model=self.dataSource[indexPath.item];
+    ViewController *vc=[[ViewController alloc]init];
+    vc.keyWords=[BHTools decodeFromPercentEscapeString:model.MovieName];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 - (void)setupUI {
     NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 8, Width, Width * 9 / 16)];
     pageFlowView.backgroundColor = [UIColor whiteColor];
@@ -50,26 +108,34 @@
     UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, pageFlowView.frame.size.height - 24, Width, 8)];
     pageFlowView.pageControl = pageControl;
     [pageFlowView addSubview:pageControl];
-    
     //    [self.view addSubview:pageFlowView];
-    
     /****************************
      使用导航控制器(UINavigationController)
      如果控制器中不存在UIScrollView或者继承自UIScrollView的UI控件
      请使用UIScrollView作为NewPagedFlowView的容器View,才会显示正常,如下
      *****************************/
-    
     UIScrollView *bottomScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     [pageFlowView reloadData];
     [bottomScrollView addSubview:pageFlowView];
     [self.view addSubview:bottomScrollView];
-    
     [bottomScrollView addSubview:pageFlowView];
-    
     self.pageFlowView = pageFlowView;
     //添加到主view上
-    [self.view addSubview:self.indicateLabel];
-    
+}
+//处理请求下来的数据
+- (NSMutableArray *)handleData:(NSArray *)array{
+    NSMutableArray *tempArr=[[NSMutableArray alloc]init];
+        for (NSDictionary *dict in array) {
+            HotMessageModel *model=[[HotMessageModel alloc]initWithDictionary:dict error:nil];
+            [tempArr addObject:model];
+        }
+    return tempArr;
+}
+-(NSMutableArray *)dataSource{
+    if(!_dataSource){
+        _dataSource=[[NSMutableArray alloc]init];
+    }
+    return _dataSource;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -79,10 +145,7 @@
 
 #pragma mark NewPagedFlowView Delegate
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
-    
     NSLog(@"点击了第%ld张图",(long)subIndex + 1);
-    
-    self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)subIndex + 1];
 }
 
 #pragma mark NewPagedFlowView Datasource
@@ -118,18 +181,25 @@
     }
     return _imageArray;
 }
-
-- (UILabel *)indicateLabel {
-    
-    if (_indicateLabel == nil) {
-        _indicateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 400, Width, 16)];
-        _indicateLabel.textColor = [UIColor blueColor];
-        _indicateLabel.font = [UIFont systemFontOfSize:16.0];
-        _indicateLabel.textAlignment = NSTextAlignmentCenter;
-        _indicateLabel.text = @"指示Label";
+-(UICollectionView *)collectionView{
+    if(!_collectionView){
+        //1.初始化layout
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        //设置item大小
+        flowLayout.itemSize = CGSizeMake(ScreenWidth / 4 - PXChange(20), ((ScreenWidth / 4 - PXChange(20))/3.0f)*4.0f+PXChange(30));
+        //设置滑动方向
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        //设置最小间距
+        flowLayout.minimumLineSpacing = PXChange(10);
+        _collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(PXChange(40), self.pageFlowView.bottom+PXChange(20), ScreenWidth-PXChange(80), ScreenHeight-64-49) collectionViewLayout:flowLayout];
+        _collectionView.delegate=self;
+        _collectionView.dataSource=self;
+        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.showsVerticalScrollIndicator = NO;
+        [_collectionView registerNib:[UINib nibWithNibName:@"HotSearchCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"hotSearchCell"];
+        [self.view addSubview:_collectionView];
     }
-    
-    return _indicateLabel;
+    return _collectionView;
 }
 
 #pragma mark --旋转屏幕改变newPageFlowView大小之后实现该方法
