@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="xBP-Fs-EBR">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search View Controller-->
+        <scene sceneID="PgJ-O9-qHO">
+            <objects>
+                <viewController id="hZi-hl-PMl" customClass="SearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qo7-Vy-aCQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q8a-nf-p8Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Un-Sc-QTq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入电影或者电视名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imQ-0T-QEA">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DmG-xm-PW2">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="Dwf-59-hRq"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeS-cN-KXF">
+                                <state key="normal" title="搜索"/>
+                                <connections>
+                                    <action selector="searchClick:" destination="hZi-hl-PMl" eventType="touchUpInside" id="Y2x-n3-9vU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="imQ-0T-QEA" firstAttribute="top" secondItem="Qo7-Vy-aCQ" secondAttribute="bottom" constant="137" id="1mV-TQ-P86"/>
+                            <constraint firstItem="DmG-xm-PW2" firstAttribute="top" secondItem="Qo7-Vy-aCQ" secondAttribute="bottom" constant="200" id="Egs-Tg-PHQ"/>
+                            <constraint firstItem="imQ-0T-QEA" firstAttribute="centerX" secondItem="2Un-Sc-QTq" secondAttribute="centerX" id="F9K-SI-KsG"/>
+                            <constraint firstItem="OeS-cN-KXF" firstAttribute="centerX" secondItem="2Un-Sc-QTq" secondAttribute="centerX" id="QMb-GN-odS"/>
+                            <constraint firstItem="DmG-xm-PW2" firstAttribute="centerX" secondItem="2Un-Sc-QTq" secondAttribute="centerX" id="QNL-AG-tTa"/>
+                            <constraint firstItem="OeS-cN-KXF" firstAttribute="top" secondItem="Qo7-Vy-aCQ" secondAttribute="bottom" constant="36" id="Rcg-ba-9al"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Akn-YT-tLm"/>
+                    <connections>
+                        <outlet property="keyWords" destination="DmG-xm-PW2" id="Fpa-qf-gU6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZC2-qL-e9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1027" y="274"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ztL-lO-8qa">
+            <objects>
+                <navigationController id="xBP-Fs-EBR" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iNc-KH-0te">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hZi-hl-PMl" kind="relationship" relationship="rootViewController" id="hPn-le-e1p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P3E-I3-wf2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="410" y="274"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>
