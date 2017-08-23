@@ -11,4 +11,6 @@
 @interface HotSearchCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *movieImage;
 @property (weak, nonatomic) IBOutlet UILabel *movieName;
+@property (weak, nonatomic) IBOutlet UILabel *movieActior;
+@property (weak, nonatomic) IBOutlet UILabel *movieRespose;
 @end

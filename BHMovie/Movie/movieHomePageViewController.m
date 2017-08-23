@@ -12,6 +12,7 @@
 #import "HotMessageModel.h"
 #import "ViewController.h"
 #import "HotSearchCollectionViewCell.h"
+#import "HomeCollectionReusableViewHeadCell.h"
 #define Width [UIScreen mainScreen].bounds.size.width
 @interface movieHomePageViewController ()<NewPagedFlowViewDelegate, NewPagedFlowViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 /**
@@ -52,6 +53,7 @@
         NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSString *dataStr=[BHTools DecodedBase64Code:[BHTools DecodedBase64Code:str]];
         NSDictionary *newdic=[BHTools dictionaryWithJsonString:dataStr];
+        NSLog(@"%@",newdic);
         self.dataSource=[self handleData:(NSArray *)newdic];
         [self loadMainUI];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -67,17 +69,25 @@
     return self.dataSource.count;
 }
 //设置sectionHeader | sectionFoot
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-//    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-//        UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:collettionSectionHeader forIndexPath:indexPath];
-//        return view;
-//    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"collettionSectionHeader" forIndexPath:indexPath];
+//        view.frame=CGRectMake(0, 0, ScreenWidth, PXChange(200));
+//        view.backgroundColor=[UIColor yellowColor];
+        return view;
+    }
+//    else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
 //        UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collettionSectionFoot forIndexPath:indexPath];
 //        return view;
-//    }else{
-//        return nil;
 //    }
-//}
+    else{
+        return nil;
+    }
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(ScreenWidth, PXChange(50));
+}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HotSearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"hotSearchCell" forIndexPath:indexPath];
@@ -186,17 +196,21 @@
         //1.初始化layout
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         //设置item大小
-        flowLayout.itemSize = CGSizeMake(ScreenWidth / 4 - PXChange(20), ((ScreenWidth / 4 - PXChange(20))/3.0f)*4.0f+PXChange(30));
+//        flowLayout.itemSize = CGSizeMake(ScreenWidth / 4 + PXChange(20), ((ScreenWidth / 4 - PXChange(20))/3.0f)*4.0f+PXChange(20));
+        flowLayout.itemSize = CGSizeMake(PXChange(280), PXChange(200));
         //设置滑动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //设置最小间距
         flowLayout.minimumLineSpacing = PXChange(10);
-        _collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(PXChange(40), self.pageFlowView.bottom+PXChange(20), ScreenWidth-PXChange(80), ScreenHeight-64-49) collectionViewLayout:flowLayout];
+        _collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(PXChange(20), self.pageFlowView.bottom+PXChange(20), ScreenWidth-PXChange(40), ScreenHeight-64-49-self.pageFlowView.height-PXChange(70)) collectionViewLayout:flowLayout];
         _collectionView.delegate=self;
         _collectionView.dataSource=self;
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         [_collectionView registerNib:[UINib nibWithNibName:@"HotSearchCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"hotSearchCell"];
+//        [_collectionView registerNib:[UINib nibWithNibName:collectionViewCell bundle:nil] forCellWithReuseIdentifier:collectionViewCell];
+        [_collectionView registerNib:[UINib nibWithNibName:@"HomeCollectionReusableViewHeadCell" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"collettionSectionHeader"];
+//        [_collectionView registerNib:[UINib nibWithNibName:collettionSectionFoot bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collettionSectionFoot];
         [self.view addSubview:_collectionView];
     }
     return _collectionView;
