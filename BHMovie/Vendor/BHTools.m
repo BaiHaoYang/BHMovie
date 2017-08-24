@@ -120,4 +120,8 @@
     return [NSString stringWithFormat:@"%@%@",HeadUrl,subStr];
 
 }
+//+(NSString *)findTrueMovieUrl:(NSString *)url{
+//    
+//
+//}
 @end

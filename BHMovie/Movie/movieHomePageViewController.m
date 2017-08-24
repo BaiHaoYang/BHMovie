@@ -13,6 +13,7 @@
 #import "ViewController.h"
 #import "HotSearchCollectionViewCell.h"
 #import "HomeCollectionReusableViewHeadCell.h"
+#import "MoviePlayViewController.h"
 #define Width [UIScreen mainScreen].bounds.size.width
 @interface movieHomePageViewController ()<NewPagedFlowViewDelegate, NewPagedFlowViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 /**
@@ -33,6 +34,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent=NO;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,24 +70,17 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
-//设置sectionHeader | sectionFoot
+//设置collection的头视图
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"collettionSectionHeader" forIndexPath:indexPath];
-//        view.frame=CGRectMake(0, 0, ScreenWidth, PXChange(200));
-//        view.backgroundColor=[UIColor yellowColor];
         return view;
     }
-//    else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
-//        UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collettionSectionFoot forIndexPath:indexPath];
-//        return view;
-//    }
     else{
         return nil;
     }
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     return CGSizeMake(ScreenWidth, PXChange(50));
 }
 
@@ -99,11 +94,11 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     HotMessageModel *model=self.dataSource[indexPath.item];
-    ViewController *vc=[[ViewController alloc]init];
-    vc.keyWords=[BHTools decodeFromPercentEscapeString:model.MovieName];
-    [vc setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    MoviePlayViewController *mvp=[[MoviePlayViewController alloc]init];
+    mvp.MovieUrl=@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4";
+    mvp.MovieName=[BHTools decodeFromPercentEscapeString:model.MovieName];
+    mvp.hidesBottomBarWhenPushed = YES;
+     [self.navigationController pushViewController:mvp animated:YES];
 }
 
 - (void)setupUI {
@@ -138,6 +133,9 @@
         for (NSDictionary *dict in array) {
             HotMessageModel *model=[[HotMessageModel alloc]initWithDictionary:dict error:nil];
             [tempArr addObject:model];
+            if(tempArr.count>8){
+                return tempArr;
+            }
         }
     return tempArr;
 }
@@ -196,13 +194,14 @@
         //1.初始化layout
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         //设置item大小
-//        flowLayout.itemSize = CGSizeMake(ScreenWidth / 4 + PXChange(20), ((ScreenWidth / 4 - PXChange(20))/3.0f)*4.0f+PXChange(20));
-        flowLayout.itemSize = CGSizeMake(PXChange(280), PXChange(200));
+        CGFloat width=(ScreenWidth-PXChange(40))/3.0f-PXChange(15);
+        flowLayout.itemSize = CGSizeMake( width,width*4.0f/3.0f+PXChange(30));
+//        flowLayout.itemSize = CGSizeMake(PXChange(280), PXChange(200));
         //设置滑动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //设置最小间距
-        flowLayout.minimumLineSpacing = PXChange(10);
-        _collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(PXChange(20), self.pageFlowView.bottom+PXChange(20), ScreenWidth-PXChange(40), ScreenHeight-64-49-self.pageFlowView.height-PXChange(70)) collectionViewLayout:flowLayout];
+        flowLayout.minimumLineSpacing = PXChange(16);
+        _collectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(PXChange(20), self.pageFlowView.bottom+PXChange(20), ScreenWidth-PXChange(40), ScreenHeight-64-49-self.pageFlowView.height-PXChange(100)) collectionViewLayout:flowLayout];
         _collectionView.delegate=self;
         _collectionView.dataSource=self;
         _collectionView.backgroundColor = [UIColor clearColor];

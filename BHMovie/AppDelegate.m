@@ -33,6 +33,7 @@
     [self setMainUI];
     [self SetbackMusicType];
     //开启远程事件(锁屏时使用)
+    self.allowRotation=YES;
     [application beginReceivingRemoteControlEvents];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     return YES;

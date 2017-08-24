@@ -19,4 +19,5 @@
 + (NSString *)base64DecodeString:(NSString *)string;
 + (NSString *)encodeBase64String:(NSString *)string;
 + (NSString *)configUrlWithString:(NSString *)subStr;
++(NSString *)findTrueMovieUrl:(NSString *)url;
 @end

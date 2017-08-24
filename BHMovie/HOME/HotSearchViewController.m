@@ -12,6 +12,7 @@
 #import "SearchViewController.h"
 #import "QQDrawerViewController.h"
 #import "movieHomePageViewController.h"
+#import "MoviePlayViewController.h"
 @interface HotSearchViewController ()<UITextFieldDelegate,TYTabPagerControllerDataSource,TYTabPagerControllerDelegate>
 @property(nonatomic,strong)NSArray *datas;
 @property(nonatomic,strong)HotMessageModel *movieModel;
@@ -53,11 +54,8 @@
 }
 
 - (UIViewController *)tabPagerController:(TYTabPagerController *)tabPagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
-//    return nil;
     if (index == 0) {
         movieHomePageViewController *VC = [[movieHomePageViewController alloc]init];
-//        VC.view.backgroundColor=[UIColor yellowColor];
-//        VC.title = [@(index) stringValue];
         return VC;
     }else if (index%3 == 1) {
         UIViewController *VC = [[UIViewController alloc]init];
@@ -153,9 +151,11 @@
 {
     [textField resignFirstResponder];
     if(textField.text>0){
-    ViewController *vc=[[ViewController alloc]init];
-    vc.keyWords=textField.text;
-    [self.navigationController pushViewController:vc animated:YES];
+        MoviePlayViewController *mvp=[[MoviePlayViewController alloc]init];
+        mvp.MovieUrl=@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4";
+        mvp.MovieName=textField.text;
+        mvp.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:mvp animated:YES];
     }
     return YES;
 }

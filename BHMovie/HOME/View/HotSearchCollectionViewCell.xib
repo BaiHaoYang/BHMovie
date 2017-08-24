@@ -13,42 +13,48 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HotSearchCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="203" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="73" height="127"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="203" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="73" height="127"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JLn-I6-Z73">
-                        <rect key="frame" x="0.0" y="0.0" width="76" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="73" height="97.5"/>
                         <color key="backgroundColor" red="0.58152115345001221" green="0.22591577330058377" blue="0.24530156126515223" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niy-5H-AL6">
-                        <rect key="frame" x="92" y="0.0" width="101" height="100"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="101" id="38Y-LW-18d"/>
-                            <constraint firstAttribute="height" constant="100" id="MBO-PD-aih"/>
+                            <constraint firstAttribute="width" secondItem="JLn-I6-Z73" secondAttribute="height" multiplier="3:4" id="euE-q6-K1k"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="10"/>
-                        <nil key="textColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZq-70-xFo">
+                        <rect key="frame" x="0.0" y="102.5" width="73" height="24.5"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="10"/>
+                        <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="niy-5H-AL6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="87b-PL-I77"/>
-                <constraint firstItem="JLn-I6-Z73" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="X4l-u5-hVL"/>
-                <constraint firstAttribute="bottom" secondItem="JLn-I6-Z73" secondAttribute="bottom" id="gYE-fz-bTS"/>
-                <constraint firstItem="niy-5H-AL6" firstAttribute="leading" secondItem="JLn-I6-Z73" secondAttribute="trailing" constant="16" id="xek-fV-4VC"/>
-                <constraint firstItem="JLn-I6-Z73" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xq7-l8-Ktf"/>
-                <constraint firstItem="JLn-I6-Z73" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="19:25" id="yEU-3o-3dE"/>
+                <constraint firstAttribute="bottom" secondItem="RZq-70-xFo" secondAttribute="bottom" id="9NZ-3P-mTZ"/>
+                <constraint firstAttribute="trailing" secondItem="RZq-70-xFo" secondAttribute="trailing" id="Cir-IJ-ypv"/>
+                <constraint firstItem="RZq-70-xFo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="G0h-Ds-Gv7"/>
+                <constraint firstItem="JLn-I6-Z73" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JlM-Kd-1gU"/>
+                <constraint firstItem="JLn-I6-Z73" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZdD-XJ-wtf"/>
+                <constraint firstItem="RZq-70-xFo" firstAttribute="top" secondItem="JLn-I6-Z73" secondAttribute="bottom" constant="5" id="n6Z-E0-Tvl"/>
+                <constraint firstAttribute="trailing" secondItem="JLn-I6-Z73" secondAttribute="trailing" id="sld-Mq-6al"/>
             </constraints>
-            <size key="customSize" width="203" height="100"/>
+            <size key="customSize" width="73" height="127"/>
             <connections>
                 <outlet property="movieImage" destination="JLn-I6-Z73" id="hKJ-uJ-SY2"/>
-                <outlet property="movieName" destination="niy-5H-AL6" id="0Bt-bi-znQ"/>
+                <outlet property="movieName" destination="RZq-70-xFo" id="1o0-IA-HhP"/>
             </connections>
-            <point key="canvasLocation" x="7.5" y="104"/>
+            <point key="canvasLocation" x="36.5" y="90.5"/>
         </collectionViewCell>
     </objects>
 </document>

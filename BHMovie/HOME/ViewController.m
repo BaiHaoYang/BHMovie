@@ -11,8 +11,6 @@
 #import "HomeDataModel.h"
 #import "UIImageView+WebCache.h"
 #import "MoviePlayViewController.h"
-#import "PlayViewController.h"
-#import "MRVLCPlayer.h"
 #import "ZFPlayerView.h"
 #import "MoviePlayViewController.h"
 #define btnTag 200
@@ -79,24 +77,34 @@
     }
     self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, PXChange(320))];
     [self.view addSubview:self.topView];
+//    PlayerViewController *player = [[PlayerViewController alloc] init];
+//    player.hidesBottomBarWhenPushed = YES;
+//    player.video = @{@"title":@"视频一",
+//                     @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+//                     @"video":[NSURL URLWithString:@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4"]};
+//    [player.player player];
+//    [self.view addSubview:player.player];
+    // 视频资源路径
+//    [playView setUrlString:@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4"];
+    // 播放器显示位置（竖屏时）
     
-    UIImageView *movieImage=[[UIImageView alloc]initWithFrame:CGRectMake(PXChange(20), PXChange(20), PXChange(200), PXChange(260))];
-    [movieImage sd_setImageWithURL:[NSURL URLWithString:[self decodeFromPercentEscapeString:self.movieModel.MovieImage]]];
-    [self.topView addSubview:movieImage];
-    
-    
-    NSString *names=[BHTools decodeFromPercentEscapeString:self.movieModel.MovieName];
-    NSArray *array = [names componentsSeparatedByString:@"第"]; //从字符A中分隔成2个元素的数组
-    UILabel *nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(PXChange(40)+CGRectGetMaxX(movieImage.frame), PXChange(20)+PXChange(120), ScreenWidth-PXChange(40)-CGRectGetMaxX(movieImage.frame), PXChange(200))];
-    
-    nameLabel.textColor=[UIColor colorWithHexString:@"#828282"];
-    [nameLabel setFont:[UIFont systemFontOfSize:14]];
-    nameLabel.text=[NSString stringWithFormat:@"片名:%@",[array firstObject]];
-    nameLabel.numberOfLines=0;
-    [nameLabel sizeToFit];
-    [self.topView addSubview:nameLabel];
-    
-    UILabel *lineLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), ScreenWidth, PXChange(2))];
+//    UIImageView *movieImage=[[UIImageView alloc]initWithFrame:CGRectMake(PXChange(20), PXChange(20), PXChange(200), PXChange(260))];
+//    [movieImage sd_setImageWithURL:[NSURL URLWithString:[self decodeFromPercentEscapeString:self.movieModel.MovieImage]]];
+//    [self.topView addSubview:movieImage];
+//    
+//    
+//    NSString *names=[BHTools decodeFromPercentEscapeString:self.movieModel.MovieName];
+//    NSArray *array = [names componentsSeparatedByString:@"第"]; //从字符A中分隔成2个元素的数组
+//    UILabel *nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(PXChange(40)+CGRectGetMaxX(movieImage.frame), PXChange(20)+PXChange(120), ScreenWidth-PXChange(40)-CGRectGetMaxX(movieImage.frame), PXChange(200))];
+//    
+//    nameLabel.textColor=[UIColor colorWithHexString:@"#828282"];
+//    [nameLabel setFont:[UIFont systemFontOfSize:14]];
+//    nameLabel.text=[NSString stringWithFormat:@"片名:%@",[array firstObject]];
+//    nameLabel.numberOfLines=0;
+//    [nameLabel sizeToFit];
+//    [self.topView addSubview:nameLabel];
+//    
+    UILabel *lineLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 400, ScreenWidth, PXChange(2))];
     lineLabel.backgroundColor=[UIColor grayColor];
     [self.topView addSubview:lineLabel];
     self.middleView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), ScreenWidth, ScreenHeight-PXChange(320))];
@@ -200,7 +208,7 @@
         if (arr.count>0) {
             NSDictionary *dict=[arr firstObject];
             [self handleUrlData:dict];
-            [self playMovieWithUrlWithIndex:btn.tag-btnTag];
+//            [self playMovieWithUrlWithIndex:btn.tag-btnTag];
         }
         else{
         }
@@ -208,13 +216,13 @@
         NSLog(@"失败了");
     }];
 }
--(void)playMovieWithUrlWithIndex:(NSInteger)index{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    MoviePlayViewController *mv=[[MoviePlayViewController alloc]init];
-    mv.MovieUrl=_PlayUrl;
-    mv.MovieName=[NSString stringWithFormat:@"%@---%zd",self.title,index+1];
-    [self presentViewController:mv animated:YES completion:nil];
-}
+//-(void)playMovieWithUrlWithIndex:(NSInteger)index{
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    MoviePlayViewController *mv=[[MoviePlayViewController alloc]init];
+//    mv.MovieUrl=_PlayUrl;
+//    mv.MovieName=[NSString stringWithFormat:@"%@---%zd",self.title,index+1];
+//    [self presentViewController:mv animated:YES completion:nil];
+//}
 #pragma mark 工具类
 - (void)handleUrlData:(NSDictionary *)dict{
     NSString *str=[dict objectForKey:@"PlayUrl"];
