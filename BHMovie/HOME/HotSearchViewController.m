@@ -13,6 +13,7 @@
 #import "QQDrawerViewController.h"
 #import "movieHomePageViewController.h"
 #import "MoviePlayViewController.h"
+#import "ZFDownloadViewController.h"
 @interface HotSearchViewController ()<UITextFieldDelegate,TYTabPagerControllerDataSource,TYTabPagerControllerDelegate>
 @property(nonatomic,strong)NSArray *datas;
 @property(nonatomic,strong)HotMessageModel *movieModel;
@@ -132,14 +133,19 @@
     UIButton *cacheBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, PXChange(100), PXChange(88))];
     [cacheBtn setTitle:@"缓存" forState:UIControlStateNormal];
     [cacheBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [cacheBtn addTarget:self action:@selector(iconClick) forControlEvents:UIControlEventTouchUpInside];
+    [cacheBtn addTarget:self action:@selector(cacheClick) forControlEvents:UIControlEventTouchUpInside];
     cacheBtn.center=CGPointMake(ScreenWidth-cacheBtn.width/2.0f, iconView.centerY);
     [self.NavigationView addSubview:cacheBtn];
 }
 -(void)iconClick{
      [[QQDrawerViewController shareDrawerViewController] openDrawerWithOpenDuration:0.2];
 }
+-(void)cacheClick{
+    ZFDownloadViewController *zfd=[[ZFDownloadViewController alloc]init];
+    [zfd setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:zfd animated:YES];
 
+}
 #pragma mark -UITextFiledDelegate
 - (BOOL)textFieldShouldClear:(UITextField *)textField             // called when clear button pressed. return NO to ignore (no notifications)
 {

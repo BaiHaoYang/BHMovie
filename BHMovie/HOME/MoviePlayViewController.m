@@ -14,7 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <Masonry/Masonry.h>
-//#import <ZFDownload/ZFDownloadManager.h>
+#import <ZFDownload/ZFDownloadManager.h>
 #import "ZFPlayer.h"
 #import "UIImageView+LBBlurredImage.h"
 #import "UINavigationController+ZFFullscreenPopGesture.h"
@@ -68,15 +68,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.zf_prefersNavigationBarHidden = YES;
+     self.view.backgroundColor=[UIColor colorWithHexString:@"#2F2725"];
     UIImageView *imgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, self.movieFatherView.bottom, ScreenWidth, ScreenHeight-self.movieFatherView.bottom)];
-//    imgView.image=[UIImage imageNamed:@"moviePlayBgView"];
-    imgView.contentMode=UIViewContentModeScaleAspectFill;
-//    [self.view addSubview:imgView];
     UIImage *i=[UIImage imageNamed:@"moviePlayBgView"];
     [imgView setImageToBlur:i blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
     [self.view addSubview:imgView];
-    self.view.backgroundColor=[UIColor colorWithHexString:@"#2F2725"];
+    if(self.playType!=1){
     [self requestDate];
+    }else{
+     [self.playerView play];
+    }
 }
 - (void)requestDate{
     self.movieModel=[HomeDataModel new];
@@ -166,7 +167,6 @@
         [btn setTitle:[NSString stringWithFormat:@"%zd",i+1] forState:UIControlStateNormal];
         [self.middleView addSubview:btn];
         [self.btnArray addObject:btn];
-        
         if(i==self.dataSource.count-1){
                 self.middleView.contentSize = CGSizeMake(ScreenWidth*ceil(self.dataSource.count/16.0f), 0);
         }
@@ -232,6 +232,7 @@
     
 }
 -(void)backUp{
+    [self.view removeAllSubviews];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)btnClick:(UIButton *)btn{
@@ -270,8 +271,13 @@
 }
 #pragma mark 工具类
 - (void)handleUrlData:(NSDictionary *)dict{
+    
     NSString *str=[dict objectForKey:@"PlayUrl"];
+    NSString *dowlstr=[dict objectForKey:@"DownUrl"];
     _PlayUrl=[BHTools decodeFromPercentEscapeString:str];
+    _DownUrl=[BHTools decodeFromPercentEscapeString:dowlstr];
+    NSLog(@"%@",_PlayUrl);
+    NSLog(@"%@",_DownUrl);
 }
 - (NSString *)decodeFromPercentEscapeString: (NSString *) input
 {
@@ -352,29 +358,6 @@
 }
 
 #pragma mark - 定制返回
-- (void)addCustomBackBarButtonItemWithTarget:(id)target action:(SEL)action {
-    if (!target) {
-        target = self;
-        action = @selector(cancelAction:);
-    }
-    self.navigationItem.leftBarButtonItem = [self buttonWithImage:[[UIImage imageNamed:@"regsiter_btn_back_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                 highlightedImage:[[UIImage imageNamed:@"regsiter_btn_back_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ]
-                                                           target:target
-                                                           action:action];
-    
-}
-- (UIBarButtonItem *)buttonWithImage:(UIImage *)image
-                    highlightedImage:(UIImage *)highlightedImage
-                              target:(id)target
-                              action:(SEL)action {
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(0, 0, PXChange(44), PXChange(44))];
-    [button setImage:image forState:UIControlStateNormal];
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    return [[UIBarButtonItem alloc] initWithCustomView:button];
-}
-
 // 返回值要必须为NO
 - (BOOL)shouldAutorotate {
     return NO;
@@ -400,10 +383,10 @@
 
 - (void)zf_playerDownload:(NSString *)url {
     // 此处是截取的下载地址，可以自己根据服务器的视频名称来赋值
-    NSString *name = [url lastPathComponent];
-    //    [[ZFDownloadManager sharedDownloadManager] downFileUrl:url filename:name fileimage:nil];
+    NSString *name = self.playerModel.title;
+    [[ZFDownloadManager sharedDownloadManager] downFileUrl:_PlayUrl filename:name fileimage:nil];
     //    // 设置最多同时下载个数（默认是3）
-    //    [ZFDownloadManager sharedDownloadManager].maxCount = 4;
+    [ZFDownloadManager sharedDownloadManager].maxCount = 4;
 }
 
 - (void)zf_playerControlViewWillShow:(UIView *)controlView isFullscreen:(BOOL)fullscreen {
@@ -436,7 +419,11 @@
     if (!_playerModel) {
         _playerModel                  = [[ZFPlayerModel alloc] init];
         _playerModel.title            = self.MovieName;
+        if(self.playType==1){
+            _playerModel.videoURL=self.MovieUrlForLoacl;
+        }else{
         _playerModel.videoURL         = [NSURL URLWithString:self.MovieUrl];
+        }
         _playerModel.placeholderImage = [UIImage imageNamed:@"loading_bgView1"];
         _playerModel.fatherView     =self.movieFatherView;
         //        _playerModel.resolutionDic = @{@"高清" : self.videoURL.absoluteString,
@@ -465,8 +452,7 @@
 //        _playerView.playerLayerGravity = ZFPlayerLayerGravityResize;
         
         // 打开下载功能（默认没有这个功能）
-        _playerView.hasDownload    = NO;
-        
+        _playerView.hasDownload    = YES;
         // 打开预览图
         self.playerView.hasPreviewView = YES;
         

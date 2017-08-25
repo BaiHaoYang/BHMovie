@@ -20,7 +20,6 @@
     self.title=@"搜一搜";
     self.view.backgroundColor=[UIColor whiteColor];
     [self loadMainView];
-    [self addCustomBackBarButtonItemWithTarget:self action:@selector(backUp)];
 }
 -(void)loadMainView{
     UILabel *titlelabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -66,32 +65,8 @@
 -(void)backUp{
     [self.navigationController popViewControllerAnimated:YES];
 }
-#pragma mark - 定制返回
-- (void)addCustomBackBarButtonItemWithTarget:(id)target action:(SEL)action {
-    if (!target) {
-        target = self;
-        action = @selector(cancelAction:);
-    }
-    self.navigationItem.leftBarButtonItem = [self buttonWithImage:[[UIImage imageNamed:@"regsiter_btn_back_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                 highlightedImage:[[UIImage imageNamed:@"regsiter_btn_back_default"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ]
-                                                           target:target
-                                                           action:action];
-    
-}
-- (UIBarButtonItem *)buttonWithImage:(UIImage *)image
-                    highlightedImage:(UIImage *)highlightedImage
-                              target:(id)target
-                              action:(SEL)action {
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(0, 0, PXChange(44), PXChange(44))];
-    [button setImage:image forState:UIControlStateNormal];
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    return [[UIBarButtonItem alloc] initWithCustomView:button];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

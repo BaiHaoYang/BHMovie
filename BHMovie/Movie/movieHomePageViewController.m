@@ -97,6 +97,7 @@
     MoviePlayViewController *mvp=[[MoviePlayViewController alloc]init];
     mvp.MovieUrl=@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4";
     mvp.MovieName=[BHTools decodeFromPercentEscapeString:model.MovieName];
+//    mvp.MovieImage=[BHTools decodeFromPercentEscapeString:model.MovieImage];
     mvp.hidesBottomBarWhenPushed = YES;
      [self.navigationController pushViewController:mvp animated:YES];
 }

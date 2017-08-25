@@ -14,6 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
   - BmobSDK (2.2.1):
     - WechatOpenSDK (~> 1.7.7)
   - Bugly (2.4.8)
@@ -31,6 +44,8 @@ PODS:
   - SDWebImage/Core (4.0.0)
   - TYPagerController (2.0.1)
   - WechatOpenSDK (1.7.9)
+  - ZFDownload (1.0.2):
+    - ASIHTTPRequest
   - ZFPlayer (2.1.5):
     - Masonry
 
@@ -46,10 +61,12 @@ DEPENDENCIES:
   - MJRefresh (~> 3.1.10)
   - SDWebImage (~> 4.0.0-beta2)
   - TYPagerController (~> 2.0.1)
+  - ZFDownload
   - ZFPlayer
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   BmobSDK: 952f0ca736deae9d1b6591d72337df7d9072d4f2
   Bugly: da3c02408c14838d498429320545a8e439392978
   FreeStreamer: d415160f7b5231deb7e4d9e3ebf4076e1d0b5e52
@@ -62,8 +79,9 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TYPagerController: f86e3f85d723caa967655f23661d32beaee7db77
   WechatOpenSDK: 1fe7e3b07db860d6a936c3ff4a5aba6b890958d9
+  ZFDownload: a52f94ebb080833b8a8ceb19a409f2941343fe7f
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 1c2743596582e7fbcc5f4cf624ad118fa9c33eee
+PODFILE CHECKSUM: fbdfd0514a166f55e6bf46cb5437a693a32c4493
 
 COCOAPODS: 1.3.1

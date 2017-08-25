@@ -85,6 +85,9 @@
 		816AA71D1F020138005D6278 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 816AA71C1F020138005D6278 /* libc++.tbd */; };
 		816AA7251F0241E8005D6278 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 816AA7221F0241E8005D6278 /* UIImage+ImageEffects.m */; };
 		816AA7261F0241E8005D6278 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 816AA7241F0241E8005D6278 /* UIImageView+LBBlurredImage.m */; };
+		817BAA221F5000630021636F /* ZFDownloadedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817BAA1D1F5000630021636F /* ZFDownloadedCell.m */; };
+		817BAA231F5000630021636F /* ZFDownloadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817BAA1F1F5000630021636F /* ZFDownloadingCell.m */; };
+		817BAA241F5000630021636F /* ZFDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817BAA211F5000630021636F /* ZFDownloadViewController.m */; };
 		8193ECF91E5C10500050BB24 /* HotSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8193ECF81E5C10500050BB24 /* HotSearchViewController.m */; };
 		8193ED011E5C11CB0050BB24 /* BHTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8193ED001E5C11CB0050BB24 /* BHTools.m */; };
 		8193ED041E5C14610050BB24 /* HotMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8193ED031E5C14610050BB24 /* HotMessageModel.m */; };
@@ -223,6 +226,12 @@
 		816AA7221F0241E8005D6278 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		816AA7231F0241E8005D6278 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		816AA7241F0241E8005D6278 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
+		817BAA1C1F5000630021636F /* ZFDownloadedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadedCell.h; sourceTree = "<group>"; };
+		817BAA1D1F5000630021636F /* ZFDownloadedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadedCell.m; sourceTree = "<group>"; };
+		817BAA1E1F5000630021636F /* ZFDownloadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadingCell.h; sourceTree = "<group>"; };
+		817BAA1F1F5000630021636F /* ZFDownloadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadingCell.m; sourceTree = "<group>"; };
+		817BAA201F5000630021636F /* ZFDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDownloadViewController.h; sourceTree = "<group>"; };
+		817BAA211F5000630021636F /* ZFDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDownloadViewController.m; sourceTree = "<group>"; };
 		8193ECF71E5C10500050BB24 /* HotSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchViewController.h; sourceTree = "<group>"; };
 		8193ECF81E5C10500050BB24 /* HotSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchViewController.m; sourceTree = "<group>"; };
 		8193ECFF1E5C11CB0050BB24 /* BHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHTools.h; sourceTree = "<group>"; };
@@ -587,9 +596,23 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		817BAA1B1F5000630021636F /* DoenLoadVideo */ = {
+			isa = PBXGroup;
+			children = (
+				817BAA1C1F5000630021636F /* ZFDownloadedCell.h */,
+				817BAA1D1F5000630021636F /* ZFDownloadedCell.m */,
+				817BAA1E1F5000630021636F /* ZFDownloadingCell.h */,
+				817BAA1F1F5000630021636F /* ZFDownloadingCell.m */,
+				817BAA201F5000630021636F /* ZFDownloadViewController.h */,
+				817BAA211F5000630021636F /* ZFDownloadViewController.m */,
+			);
+			path = DoenLoadVideo;
+			sourceTree = "<group>";
+		};
 		8193ECF61E5C10280050BB24 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				817BAA1B1F5000630021636F /* DoenLoadVideo */,
 				810A25C21F4D3AEE00D7D1AC /* HomePage */,
 				046187811DC04F1000D1407E /* MoviePlayViewController.h */,
 				046187821DC04F1000D1407E /* MoviePlayViewController.m */,
@@ -816,6 +839,7 @@
 				8167AF581ECC5557008C24E5 /* MCWiFiManager.m in Sources */,
 				8113F0691F42D17B001E8210 /* KeychainIDFA.m in Sources */,
 				0425F5681DC0A08C00728A20 /* ReadFile.m in Sources */,
+				817BAA221F5000630021636F /* ZFDownloadedCell.m in Sources */,
 				048B1A3F1DBF584100F5D2A7 /* HomeDataModel.m in Sources */,
 				816A64941F4D7BBC00FC33D5 /* HomeCollectionReusableViewHeadCell.m in Sources */,
 				8167AF541ECC5557008C24E5 /* MCURLRequest.m in Sources */,
@@ -825,6 +849,7 @@
 				041C50041DBF067900F31F32 /* AppDelegate.m in Sources */,
 				8193ED011E5C11CB0050BB24 /* BHTools.m in Sources */,
 				8113F0751F42F439001E8210 /* QQLeftTableViewController.m in Sources */,
+				817BAA241F5000630021636F /* ZFDownloadViewController.m in Sources */,
 				041C500D1DBF067900F31F32 /* BHMovie.xcdatamodeld in Sources */,
 				810A25D21F4D3C0400D7D1AC /* NewPagedFlowView.m in Sources */,
 				041C502C1DBF070500F31F32 /* ViewController.m in Sources */,
@@ -837,6 +862,7 @@
 				815AA0E91ECD4CA300CB1539 /* MusicSearchViewController.m in Sources */,
 				816AA7251F0241E8005D6278 /* UIImage+ImageEffects.m in Sources */,
 				046187831DC04F1000D1407E /* MoviePlayViewController.m in Sources */,
+				817BAA231F5000630021636F /* ZFDownloadingCell.m in Sources */,
 				814311F81F429E0900D43278 /* BHLoginViewController.m in Sources */,
 				8167AF571ECC5557008C24E5 /* MCURLSessionConfiguration.m in Sources */,
 				816AA7261F0241E8005D6278 /* UIImageView+LBBlurredImage.m in Sources */,

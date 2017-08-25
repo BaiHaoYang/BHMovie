@@ -10,5 +10,8 @@
 #import "HomeDataModel.h"
 @interface MoviePlayViewController : UIViewController
 @property (nonatomic,copy)NSString *MovieUrl;
+@property (nonatomic,copy)NSString *MovieDownUrl;
 @property (nonatomic,copy)NSString *MovieName;
+@property (nonatomic,copy)NSURL *MovieUrlForLoacl;
+@property (nonatomic,assign)NSInteger playType;//等于1的时候是播放本地视频
 @end

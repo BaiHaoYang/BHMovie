@@ -12,5 +12,5 @@ pod 'HYBNetworking', '~> 3.3.0'
 pod 'FreeStreamer','~> 3.7.2'
 pod 'Bugly'
 pod 'TYPagerController' , '~> 2.0.1'
-#pod ''
+pod 'ZFDownload'
 end
