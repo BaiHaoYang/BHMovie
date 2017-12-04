@@ -36,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent=NO;
-    self.title=@"音乐排行榜";
     [self requestDate];
     [self makeNavigationStyle];
 }

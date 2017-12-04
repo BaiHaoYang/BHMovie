@@ -23,7 +23,7 @@
 
 #endif
 
-
+#define BH_Color_Main @"#008B8B"
 #define BHM_Version @"1.0"
 #import "netConfig.h"
 #import "Bmob.h"

@@ -684,13 +684,13 @@
 				TargetAttributes = {
 					041C4FFB1DBF067900F31F32 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 25ZF24A894;
+						DevelopmentTeam = 6YEF27W7HZ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -995,8 +995,7 @@
 			baseConfigurationReference = 9F69E57B83259F2780B8B664 /* Pods-BHMovie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BHMovie/BHMovie.entitlements;
-				DEVELOPMENT_TEAM = 25ZF24A894;
+				DEVELOPMENT_TEAM = 6YEF27W7HZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1021,8 +1020,7 @@
 			baseConfigurationReference = E8FC034E1E17B61AE7B4F33F /* Pods-BHMovie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BHMovie/BHMovie.entitlements;
-				DEVELOPMENT_TEAM = 25ZF24A894;
+				DEVELOPMENT_TEAM = 6YEF27W7HZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

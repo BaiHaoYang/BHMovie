@@ -35,24 +35,18 @@
 }
 
 - (void)setUpUI{
-//    QQMessageViewController *messageViewController = [[QQMessageViewController alloc]init];
-//    [self addChildViewController:messageViewController andTabTitle:@"消息" andDefaultImageName:@"tab_recent_nor" andSelectedImageName:@"tab_recent_press"];
-//    QQFriendViewController *friendViewController = [[QQFriendViewController alloc]init];
-//    [self addChildViewController:friendViewController andTabTitle:@"联系人" andDefaultImageName:@"tab_buddy_nor" andSelectedImageName:@"tab_buddy_press"];
-//    QQDynamicsViewController *dynamicsViewController = [[QQDynamicsViewController alloc]init];
-//    [self addChildViewController:dynamicsViewController andTabTitle:@"动态" andDefaultImageName:@"tab_qworld_nor" andSelectedImageName:@"tab_qworld_press"];
     HotSearchViewController *searchHot=[[HotSearchViewController alloc]init];
-    searchHot.title=@"热门搜索";
+    searchHot.title=@"视频";
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:searchHot];
     BHMusicViewController *music=[[BHMusicViewController alloc]init];
-    music.title=@"热门音乐";
+    music.title=@"音乐";
     UINavigationController *nav1=[[UINavigationController alloc]initWithRootViewController:music];
     [searchHot.tabBarItem setImage: [[UIImage imageNamed:@"hotSearchGray"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [searchHot.tabBarItem setSelectedImage: [[UIImage imageNamed:@"hotSearch"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [music.tabBarItem setImage: [[UIImage imageNamed:@"musicGray"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [music.tabBarItem setSelectedImage: [[UIImage imageNamed:@"music"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     self.viewControllers=@[nav,nav1];
-    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"#008B8B" alpha:1.0f]];
     
 }
 

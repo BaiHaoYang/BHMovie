@@ -88,12 +88,12 @@
     self.progress.progress = progress;
     
     // NSString *spped = [NSString stringWithFormat:@"%@/S",[ZFCommonHelper getFileSizeString:[NSString stringWithFormat:@"%lu",[ASIHTTPRequest averageBandwidthUsedPerSecond]]]];
-    if (fileInfo.speed) {
-        NSString *speed = [NSString stringWithFormat:@"%@ 剩余%@",fileInfo.speed,fileInfo.remainingTime];
-        self.speedLabel.text = speed;
-    } else {
-        self.speedLabel.text = @"正在获取";
-    }
+//    if (fileInfo.speed) {
+//        NSString *speed = [NSString stringWithFormat:@"%@ 剩余%@",fileInfo.speed,fileInfo.remainingTime];
+//        self.speedLabel.text = speed;
+//    } else {
+//        self.speedLabel.text = @"正在获取";
+//    }
 
     if (fileInfo.downloadState == ZFDownloading) { //文件正在下载
         self.downloadBtn.selected = NO;

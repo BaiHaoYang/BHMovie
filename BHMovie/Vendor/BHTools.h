@@ -13,11 +13,13 @@
 + (NSString *)DecodedBase64Code:(NSString *)data;//解析json字符
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;//把json字符串转换为Json字典
 + (id)toArrayOrNSDictionary:(NSData *)jsonData;
-+(BOOL)isNull:(id)object;//判断字符串是否为null
++ (BOOL)isNull:(id)object;//判断字符串是否为null
 + (void)showAlertView:(NSString *)string;
-+(UIImage*) createImageWithColor:(UIColor*)color;
++ (UIImage *) createImageWithColor:(UIColor*)color;
 + (NSString *)base64DecodeString:(NSString *)string;
 + (NSString *)encodeBase64String:(NSString *)string;
 + (NSString *)configUrlWithString:(NSString *)subStr;
-+(NSString *)findTrueMovieUrl:(NSString *)url;
++ (NSString *)findTrueMovieUrl:(NSString *)url;
++ (NSArray *)stringToJSON:(NSString *)jsonStr;//把json字符串转换为数组
++ (BOOL)isIPhoneX;
 @end

@@ -44,7 +44,6 @@
     return dic;
 }
 + (id)toArrayOrNSDictionary:(NSData *)jsonData{
-    
     NSError *error = nil;
     id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                     options:NSJSONReadingAllowFragments
@@ -53,7 +52,6 @@
     if (jsonObject != nil && error == nil){
         return jsonObject;
     }else{
-        // 解析错误
         return nil;
     }
     
@@ -61,38 +59,21 @@
 + (void)showAlertView:(NSString *)string {
     if (string.length > 0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:string delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-        //        alertView.tag = AlertViewTag_Other;
         [alertView show];
     }
 }
-+(BOOL)isNull:(id)object
-
-{
-    
-    // 判断是否为空串
-    
++(BOOL)isNull:(id)object{
     if ([object isEqual:[NSNull null]]) {
-        
         return NO;
-        
     }
-    
     else if ([object isKindOfClass:[NSNull class]])
-        
         {
-        
         return NO;
-        
         }
-    
     else if (object==nil){
-        
         return NO;
-        
     }
-    
     return YES;
-    
 }
 +(UIImage*) createImageWithColor:(UIColor*) color
 {
@@ -116,12 +97,30 @@
     return [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
 }
 + (NSString *)configUrlWithString:(NSString *)subStr{
-    
     return [NSString stringWithFormat:@"%@%@",HeadUrl,subStr];
-
 }
-//+(NSString *)findTrueMovieUrl:(NSString *)url{
-//    
-//
-//}
+- (NSArray *)stringToJSON:(NSString *)jsonStr {
+    if (jsonStr) {
+        id tmp = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments | NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:nil];
+        if (tmp) {
+            if ([tmp isKindOfClass:[NSArray class]]) {
+                return tmp;
+            } else if([tmp isKindOfClass:[NSString class]]
+                      || [tmp isKindOfClass:[NSDictionary class]]) {
+                return [NSArray arrayWithObject:tmp];
+            } else {
+                return nil;
+            }
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
++ (BOOL)isIPhoneX {
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    CGFloat maxHeight = MAX(size.width, size.height);
+    return maxHeight == 812;
+}
 @end
