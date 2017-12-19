@@ -16,5 +16,4 @@ pod 'UMengUShare/UI'
 pod 'UMengUShare/Social/ReducedWeChat'#精简版微信
 pod 'UMengUShare/Social/ReducedQQ'#精简版QQ
 pod 'UMengUShare/Social/ReducedSina'#精简版新浪微博
-pod 'MSWeakTimer', '~> 1.1.0'
 end

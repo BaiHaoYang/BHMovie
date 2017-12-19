@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="115" id="KGk-i7-Jjw" customClass="MainVideoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="114.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HwV-TI-4BD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRK-cu-cb6">
+                        <rect key="frame" x="0.0" y="93.5" width="320" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="O6G-vp-eoc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="HwV-TI-4BD" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="705-QU-Nd4"/>
+                    <constraint firstItem="HwV-TI-4BD" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="EhM-fe-iU8"/>
+                    <constraint firstItem="HwV-TI-4BD" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" constant="-20" id="Gbg-ix-4WW"/>
+                    <constraint firstItem="HwV-TI-4BD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-10" id="g3I-UW-bje"/>
+                    <constraint firstItem="WRK-cu-cb6" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="h7z-2K-hfp"/>
+                    <constraint firstAttribute="bottom" secondItem="WRK-cu-cb6" secondAttribute="bottom" id="q8w-3s-AtS"/>
+                    <constraint firstItem="WRK-cu-cb6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qT9-oI-obV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="covweImg" destination="HwV-TI-4BD" id="kKD-PT-Ptg"/>
+                <outlet property="titLab" destination="WRK-cu-cb6" id="8X0-g0-4OA"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="87.5"/>
+        </tableViewCell>
+    </objects>
+</document>

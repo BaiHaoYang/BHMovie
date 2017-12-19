@@ -212,7 +212,7 @@
 }
 
 - (void)playNewVideo {
-    self.playerModel.videoURL         = [NSURL URLWithString:@"http://p06aj8gat.bkt.clouddn.com/tumblr_okq0suX4lT1qc940m.mp4"];
+    self.playerModel.videoURL         = [NSURL URLWithString:self.MovieUrl];
     NSLog(@"%@",self.MovieUrl);
     // 设置网络封面图
     self.playerModel.placeholderImageURLString = @"http://img.wdjimg.com/image/video/447f973848167ee5e44b67c8d4df9839_0_0.jpeg";

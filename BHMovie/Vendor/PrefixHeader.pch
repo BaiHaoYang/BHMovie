@@ -34,5 +34,6 @@
 #import "UIView+Sizes.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+LBBlurredImage.h"
+#import "AFNetworking.h"
 #endif /* PrefixHeader_pch */
 

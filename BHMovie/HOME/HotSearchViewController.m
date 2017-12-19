@@ -14,68 +14,64 @@
 #import "movieHomePageViewController.h"
 #import "MoviePlayViewController.h"
 #import "ZFDownloadViewController.h"
+#import "HYBNetworking.h"
+#import "MJRefresh.h"
+#import "MainVideoCell.h"
+//560  315
 @interface HotSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSMutableArray *dataSourceArr;
 @property(nonatomic,strong)UITableView *tabView;
+@property(nonatomic,strong)UITextField *ipFiled;
+@property(nonatomic,strong)UIButton *Ipbtn;
+
 @end
 
 @implementation HotSearchViewController
+{
+    NSInteger startPage;
+    BOOL isRefresh;
+    NSString *ipStr;
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    startPage = 0;
+    isRefresh = NO;
+    ipStr = @"116.196.76.128";
     self.navigationController.navigationBar.translucent=NO;
     [self makeNavigationStyle];
-    self.dataSourceArr=[NSMutableArray arrayWithArray:@[@{@"urls":@"https://vt.tumblr.com/tumblr_okq0suX4lT1qc940m.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nr3bkvlRRz1rtxgiz.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_omkaisF8aS1vuqiyl.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_okc8ibDFLY1vhcets.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_obgwhy3RKp1ukc4w5.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_oj2jqvmeLs1rn3g8s.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nwn5z44Kyi1u62q77.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_oih4f5P6OH1rlu5fi.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_obk6vrR2K61qan9eo.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o5mq7rR4Ni1s78x4w.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_ociydxksiW1vvszfa.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_oeohppXtDy1r3uvu0.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o04nhzMFiO1uyasup.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nts1api7EE1uru22y.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_obaj6aPnmd1tlfnhc.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_oaupc5BV941uak2p6.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_oa606co6YA1r704qp.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o9axh32cNY1ui0tpn.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o91el84AuV1se36jd.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o8xu3fqs2u1rf8paa.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o2gjghAWHz1uwpmxr.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o0v2v7AQLp1s6lnsw.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o64b6tPssL1r4fz9p.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o2z0dlr5RH1r9s07o.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o4m3mwGfuT1rv66hv.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o37u8t59tu1uvpgt2.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o5189ryTD21rv66hv.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o472thy1A91tkixie.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o3kuye5SZH1r5zq6a.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_np86enaBnP1twni2p.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_o06ouk2TKC1sb4rif.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nyb8m4RxJj1utnnz4.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nzns5dcnto1r3uvu0.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nzp0yxxPO91rf8paa.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nnwbrxldkw1rt6jag.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nz3rb2C1uN1utgjsg.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nnkwacv99E1u9q4f1.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_ntrak3ABKG1tkwfb5.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nu8mku3tBP1s7cyoa.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nufoxizlj11rf1m2k.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_noz50o2WGW1u46sz3.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nstom3EGCj1r3uvu0.mp4"},
-    @{@"urls":@"https://vt.tumblr.com/tumblr_nt5rmdsBeS1s044y0.mp4"}]];
+    self.dataSourceArr=[[NSMutableArray alloc]init];
+    [self loadDateSource];
     [self.tabView reloadData];
-
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+}
+-(void)loadDateSource{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString * urlString = [@"http://116.196.76.128:3000/spi" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [HYBNetworking postWithUrl:urlString refreshCache:YES params:nil success:^(id response) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSDictionary *dic =(NSDictionary *)response;
+        NSArray *arr = dic[@"data"];
+        NSLog(@"%@",arr);
+        if(isRefresh){
+        [self.dataSourceArr removeAllObjects];
+        }
+        [self.dataSourceArr addObjectsFromArray:arr];
+        [self.tabView.mj_footer endRefreshing];
+        [self.tabView.mj_header endRefreshing];
+        [self.tabView reloadData];
+        
+    } fail:^(NSError *error) {
+        [self.tabView.mj_footer endRefreshing];
+        [self.tabView.mj_header endRefreshing];
+        NSLog(@"%@",error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 - (UITableView *)tabView{
     CGFloat barheigth = 64;
@@ -83,10 +79,23 @@
         barheigth = 88;
     }
     if(!_tabView){
-        _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-barheigth)];
+        _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.ipFiled.bottom, ScreenWidth, ScreenHeight-barheigth-self.ipFiled.bottom)];
         _tabView.delegate=self;
         _tabView.dataSource=self;
+        _tabView.mj_header = [MJRefreshNormalHeader  headerWithRefreshingBlock:^{
+            startPage = 0;
+            isRefresh = YES;
+            [self loadDateSource];
+            
+        }];
+        _tabView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            startPage ++;
+            isRefresh = NO;
+            [self loadDateSource];
+        }];
+        self.tabView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         _tabView.showsVerticalScrollIndicator = NO;
+        [_tabView registerNib:[UINib nibWithNibName:@"MainVideoCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"mainCell"];
         [self.view addSubview:_tabView];
     }
     return _tabView;
@@ -96,23 +105,30 @@
     return self.dataSourceArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(!cell){
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.textColor=[UIColor colorWithHexString:BH_Color_Main];
-    cell.textLabel.text = self.dataSourceArr[indexPath.row][@"urls"];
-    cell.textLabel.font = [UIFont systemFontOfSize:PXChange(18)];
+    MainVideoCell *cell=(MainVideoCell*)[tableView dequeueReusableCellWithIdentifier:@"mainCell"];
+    [cell.covweImg sd_setImageWithURL:[NSURL URLWithString:self.dataSourceArr[indexPath.row][@"imgurl"]] placeholderImage:[UIImage imageNamed:@"logo"]];
+    cell.titLab.text = self.dataSourceArr[indexPath.row][@"text"];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return PXChange(88);
+    return PXChange(400);
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MoviePlayViewController *mplayer = [[MoviePlayViewController alloc]init];
-    mplayer.MovieUrl = self.dataSourceArr[indexPath.row][@"urls"];
-    mplayer.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:mplayer animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *detUrl = self.dataSourceArr[indexPath.row][@"clinkUrl"];
+    NSString * urlString = [@"http://116.196.76.128:3000/spi/subPaUrl" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [HYBNetworking postWithUrl:urlString refreshCache:YES params:@{@"detailUrl":detUrl} success:^(id response) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSDictionary *dic =(NSDictionary *)response;
+            MoviePlayViewController *mv = [[MoviePlayViewController alloc]init];
+            mv.hidesBottomBarWhenPushed = YES;
+            mv.MovieUrl = dic[@"key"];
+            [self.navigationController pushViewController:mv animated:YES];
+        
+
+    } fail:^(NSError *error) {
+[MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 -(void)makeNavigationStyle{
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:BH_Color_Main];
@@ -122,8 +138,11 @@
     [titlelabel sizeToFit];
     self.navigationItem.titleView = titlelabel;
 }
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
 -(void)iconClick{
-     [[QQDrawerViewController shareDrawerViewController] openDrawerWithOpenDuration:0.2];
+    [[QQDrawerViewController shareDrawerViewController] openDrawerWithOpenDuration:0.2];
 }
 -(void)cacheClick{
     ZFDownloadViewController *zfd=[[ZFDownloadViewController alloc]init];

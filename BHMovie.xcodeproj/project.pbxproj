@@ -92,6 +92,8 @@
 		8193ED011E5C11CB0050BB24 /* BHTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8193ED001E5C11CB0050BB24 /* BHTools.m */; };
 		8193ED041E5C14610050BB24 /* HotMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8193ED031E5C14610050BB24 /* HotMessageModel.m */; };
 		8193ED091E5C17DE0050BB24 /* HotSearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8193ED071E5C17DE0050BB24 /* HotSearchCollectionViewCell.m */; };
+		81C5CEE71FD9300B00B04C2A /* MainVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C5CEE51FD9300B00B04C2A /* MainVideoCell.m */; };
+		81C5CEE81FD9300B00B04C2A /* MainVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C5CEE61FD9300B00B04C2A /* MainVideoCell.xib */; };
 		81FCAB701E5C418500DE6860 /* UIColor+Addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 81FCAB6F1E5C418500DE6860 /* UIColor+Addons.m */; };
 /* End PBXBuildFile section */
 
@@ -241,6 +243,9 @@
 		8193ED061E5C17DE0050BB24 /* HotSearchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSearchCollectionViewCell.h; sourceTree = "<group>"; };
 		8193ED071E5C17DE0050BB24 /* HotSearchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSearchCollectionViewCell.m; sourceTree = "<group>"; };
 		81AD9E081F46E4DE0079C1A4 /* netConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = netConfig.h; sourceTree = "<group>"; };
+		81C5CEE41FD9300B00B04C2A /* MainVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainVideoCell.h; sourceTree = "<group>"; };
+		81C5CEE51FD9300B00B04C2A /* MainVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainVideoCell.m; sourceTree = "<group>"; };
+		81C5CEE61FD9300B00B04C2A /* MainVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainVideoCell.xib; sourceTree = "<group>"; };
 		81FCAB6E1E5C418500DE6860 /* UIColor+Addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Addons.h"; sourceTree = "<group>"; };
 		81FCAB6F1E5C418500DE6860 /* UIColor+Addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Addons.m"; sourceTree = "<group>"; };
 		9F69E57B83259F2780B8B664 /* Pods-BHMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BHMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BHMovie/Pods-BHMovie.debug.xcconfig"; sourceTree = "<group>"; };
@@ -628,6 +633,9 @@
 				810314B61F4E9EB500F06787 /* HotSearchCollectionViewCell.xib */,
 				815AA0EA1ECD525000CB1539 /* MusicShowTableViewCell.h */,
 				815AA0EB1ECD525000CB1539 /* MusicShowTableViewCell.m */,
+				81C5CEE41FD9300B00B04C2A /* MainVideoCell.h */,
+				81C5CEE51FD9300B00B04C2A /* MainVideoCell.m */,
+				81C5CEE61FD9300B00B04C2A /* MainVideoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -744,6 +752,7 @@
 				0425F5831DC0A8B600728A20 /* Full Screen Icon@3x.png in Resources */,
 				0425F5941DC0A8B600728A20 /* Sound Icon@3x.png in Resources */,
 				8167AF5F1ECC615D008C24E5 /* musicCache.plist in Resources */,
+				81C5CEE81FD9300B00B04C2A /* MainVideoCell.xib in Resources */,
 				0425F5901DC0A8B600728A20 /* Player Control Nob@2x.png in Resources */,
 				0425F5851DC0A8B600728A20 /* Min. Icon@2x.png in Resources */,
 				816A64951F4D7BBC00FC33D5 /* HomeCollectionReusableViewHeadCell.xib in Resources */,
@@ -869,6 +878,7 @@
 				8167AF571ECC5557008C24E5 /* MCURLSessionConfiguration.m in Sources */,
 				816AA7261F0241E8005D6278 /* UIImageView+LBBlurredImage.m in Sources */,
 				8113F0761F42F439001E8210 /* QQMainTabBarController.m in Sources */,
+				81C5CEE71FD9300B00B04C2A /* MainVideoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,12 +26,17 @@
 
 @property (nonatomic, assign) NSInteger curIndex;
 
+@property (nonatomic, assign) BOOL isFirstLayout;
+@property (nonatomic, assign) BOOL didLayoutSubViews;
+
 @end
 
 @implementation TYTabPagerBar
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _isFirstLayout = YES;
+        _didLayoutSubViews = NO;
         self.backgroundColor = [UIColor clearColor];
         [self addFixAutoAdjustInsetScrollView];
         [self addCollectionView];
@@ -42,6 +47,8 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
+        _isFirstLayout = YES;
+        _didLayoutSubViews = NO;
         self.backgroundColor = [UIColor clearColor];
         [self addFixAutoAdjustInsetScrollView];
         [self addCollectionView];
@@ -181,7 +188,13 @@
     if (toIndex < _countOfItems && toIndex >= 0 && fromIndex < _countOfItems && fromIndex >= 0) {
         _curIndex = toIndex;
         [self transitionFromIndex:fromIndex toIndex:toIndex animated:animate];
-        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animate];
+        if (!_didLayoutSubViews) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animate];
+            });
+        }else {
+            [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animate];
+        }
     }
 }
 
@@ -269,12 +282,22 @@
     CGRect frame = UIEdgeInsetsInsetRect(self.bounds, _contentInset);
     BOOL needUpdateLayout = frame.size.height > 0 && _collectionView.frame.size.height != frame.size.height;
     _collectionView.frame = frame;
+    if (!_didLayoutSubViews && !CGRectIsEmpty(_collectionView.frame)) {
+        _didLayoutSubViews = YES;
+    }
     if (needUpdateLayout) {
-        [_collectionView.collectionViewLayout invalidateLayout];
+        [_layout invalidateLayout];
     }
-    if (_layout) {
-        [_layout layoutSubViews];
+    if (frame.size.height > 0 && (_isFirstLayout || needUpdateLayout)) {
+        [_layout adjustContentCellsCenterInBar];
     }
+    _isFirstLayout = NO;
+    [_layout layoutSubViews];
+}
+
+- (void)dealloc {
+    _collectionView.dataSource = nil;
+    _collectionView.delegate = nil;
 }
 
 @end
